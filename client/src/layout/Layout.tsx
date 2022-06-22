@@ -16,7 +16,7 @@ type Props = {
  */
 const Layout: FC<Props> = (props) => {
   return (
-    <Box sx={{ width: "100%", height: "100%"}}>
+    <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
       <Header />
       <AppDrawer />
       {props.children}
