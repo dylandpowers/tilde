@@ -1,10 +1,10 @@
 import { Box } from "@mui/system";
 import React from "react";
-import QuoteCard from "./QuoteCard";
+import QuoteCard from "./quote/QuoteCard";
 
 const DashboardPage: React.FC = () => {
   return (
-    <Box component="main">
+    <Box>
       <QuoteCard />
     </Box>
   );
