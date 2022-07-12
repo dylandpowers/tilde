@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import QuoteCard from "./quote/QuoteCard";
@@ -5,7 +6,9 @@ import QuoteCard from "./quote/QuoteCard";
 const DashboardPage: React.FC = () => {
   return (
     <Box>
-      <QuoteCard />
+      <Stack>
+        <QuoteCard />
+      </Stack>
     </Box>
   );
 };
