@@ -13,9 +13,6 @@ export const TokenQuery = extendType({
 
     t.nonNull.string("hooray", {
       resolve(parent, args, context) {
-        if (!context.userId) {
-          throw new AuthenticationError("Request not authenticated");
-        }
         return `Hooray for user ${context.userId}`;
       }
     });
