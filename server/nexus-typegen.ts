@@ -29,6 +29,10 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Query: {};
+  Weather: { // root type
+    degrees: string; // String!
+    iconUrl: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -45,6 +49,11 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     hooray: string; // String!
     token: string; // String!
+    weather: NexusGenRootTypes['Weather']; // Weather!
+  }
+  Weather: { // field return type
+    degrees: string; // String!
+    iconUrl: string; // String!
   }
 }
 
@@ -52,6 +61,11 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     hooray: 'String'
     token: 'String'
+    weather: 'Weather'
+  }
+  Weather: { // field return type name
+    degrees: 'String'
+    iconUrl: 'String'
   }
 }
 

@@ -3,7 +3,6 @@ import { Request } from "express";
 import { decodeAuthHeader, doesOperationRequireAuth } from "./auth";
 
 export interface Context {
-  name: string;
   userId?: number;
 }
 
@@ -17,12 +16,9 @@ export const context = ({ req }: { req: Request }): Context => {
     }
 
     return {
-      name: "Dylan Powers",
       userId: token?.userId
     };
   }
 
-  return {
-    name: "Dylan Powers"
-  };
+  return {};
 };

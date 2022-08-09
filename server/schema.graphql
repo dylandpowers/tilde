@@ -5,4 +5,10 @@
 type Query {
   hooray: String!
   token: String!
+  weather: Weather!
+}
+
+type Weather {
+  degrees: String!
+  iconUrl: String!
 }
