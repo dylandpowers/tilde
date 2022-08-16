@@ -7,7 +7,7 @@ const QuoteCard: React.FC = () => {
 
   return (
     <Card>
-      <CardContent sx={{ }}>
+      <CardContent>
         {isLoading ? (
           <Skeleton />
         ) : (
