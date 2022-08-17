@@ -7,7 +7,7 @@ import WeatherWidget from "./WeatherWidget";
 const DashboardPage: React.FC = () => {
   return (
     <Box>
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" spacing={2}>
         <Grid item xs={10}>
           <QuoteCard />
         </Grid>
