@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import QuoteCard from "./quote/QuoteCard";
-import WeatherWidget from "./WeatherWidget";
+import WeatherWidget from "./weather/WeatherWidget";
 
 const DashboardPage: React.FC = () => {
   return (
