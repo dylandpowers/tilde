@@ -24,7 +24,7 @@ const WeatherWidget: React.FC = () => {
       {loading ? (
         <Skeleton variant="circular" />
       ) : (
-        <img src="https://www.weatherbit.io/static/img/icons/c01n.png" />
+        <img src={data.weather.iconUrl} />
       )}
     </Stack>
   );
