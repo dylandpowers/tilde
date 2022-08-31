@@ -1,4 +1,3 @@
-import { AuthenticationError } from "apollo-server";
 import { Secret, sign } from "jsonwebtoken";
 import { extendType } from "nexus";
 
