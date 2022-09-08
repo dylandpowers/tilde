@@ -3,8 +3,17 @@ import { Skeleton, Stack, Typography } from "@mui/material";
 import React from "react";
 import { GET_CURRENT_WEATHER } from "./queries";
 
+interface Weather {
+  degrees: string;
+  iconUrl: string;
+}
+
+interface WeatherData {
+  weather: Weather;
+}
+
 const WeatherWidget: React.FC = () => {
-  const { data, loading } = useQuery(GET_CURRENT_WEATHER);
+  const { data, loading } = useQuery<WeatherData>(GET_CURRENT_WEATHER);
 
   return (
     <Stack
@@ -13,18 +22,12 @@ const WeatherWidget: React.FC = () => {
       alignItems="center"
     >
       <Typography variant="h4" sx={{ paddingLeft: "10px" }}>
-        {loading ? (
-          <Skeleton />
-        ) : (
-          <>
-            {data.weather.degrees}&deg;
-          </>
-        )}
+        {loading ? <Skeleton /> : <>{data && data.weather.degrees}&deg;</>}
       </Typography>
       {loading ? (
         <Skeleton variant="circular" />
       ) : (
-        <img src={data.weather.iconUrl} />
+        <img src={data && data.weather.iconUrl} />
       )}
     </Stack>
   );

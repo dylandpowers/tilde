@@ -29,6 +29,11 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Query: {};
+  Todo: { // root type
+    id?: string | null; // String
+    isCompleted: boolean; // Boolean!
+    text: string; // String!
+  }
   Weather: { // root type
     degrees: string; // String!
     iconUrl: string; // String!
@@ -48,8 +53,14 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Query: { // field return type
     hooray: string; // String!
+    todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
     token: string; // String!
     weather: NexusGenRootTypes['Weather']; // Weather!
+  }
+  Todo: { // field return type
+    id: string | null; // String
+    isCompleted: boolean; // Boolean!
+    text: string; // String!
   }
   Weather: { // field return type
     degrees: string; // String!
@@ -60,8 +71,14 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     hooray: 'String'
+    todos: 'Todo'
     token: 'String'
     weather: 'Weather'
+  }
+  Todo: { // field return type name
+    id: 'String'
+    isCompleted: 'Boolean'
+    text: 'String'
   }
   Weather: { // field return type name
     degrees: 'String'
@@ -70,6 +87,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Query: {
+    todos: { // args
+      ids?: Array<string | null> | null; // [String]
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {

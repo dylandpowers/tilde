@@ -1,9 +1,13 @@
+import { PrismaClient } from "@prisma/client";
 import { AuthenticationError } from "apollo-server";
 import { Request } from "express";
 import { decodeAuthHeader, doesOperationRequireAuth } from "./auth";
 
+const DbContext = new PrismaClient();
+
 export interface Context {
   userId?: number;
+  prisma: PrismaClient;
 }
 
 export const context = ({ req }: { req: Request }): Context => {
@@ -16,9 +20,12 @@ export const context = ({ req }: { req: Request }): Context => {
     }
 
     return {
-      userId: token?.userId
+      userId: token?.userId,
+      prisma: DbContext
     };
   }
 
-  return {};
+  return {
+    prisma: DbContext
+  };
 };

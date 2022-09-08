@@ -4,8 +4,15 @@
 
 type Query {
   hooray: String!
+  todos(ids: [String]): [Todo]
   token: String!
   weather: Weather!
+}
+
+type Todo {
+  id: String
+  isCompleted: Boolean!
+  text: String!
 }
 
 type Weather {

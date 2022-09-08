@@ -6,7 +6,7 @@ export const Weather = objectType({
   definition(t) {
     t.nonNull.string("degrees");
     t.nonNull.string("iconUrl");
-  }
+  },
 });
 
 export const WeatherQuery = extendType({
@@ -16,7 +16,7 @@ export const WeatherQuery = extendType({
       type: "Weather",
       resolve() {
         return getCurrentWeather();
-      }
+      },
     });
-  }
+  },
 });
