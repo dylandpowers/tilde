@@ -1,4 +1,4 @@
-import { objectType, extendType, list, stringArg, nonNull, idArg } from "nexus";
+import { objectType, extendType, list, stringArg, idArg, nonNull } from "nexus";
 
 export const Todo = objectType({
   name: "Todo",
@@ -19,7 +19,11 @@ export const TodoQuery = extendType({
       },
       resolve(parent, args, context) {
         if (!args.ids || !args.ids.length) {
-          return context.prisma.todo.findMany();
+          return context.prisma.todo.findMany({
+            where: {
+              isCompleted: false,
+            },
+          });
         }
 
         return context.prisma.todo.findMany({
@@ -28,10 +32,30 @@ export const TodoQuery = extendType({
               in: args.ids,
             },
             AND: {
-              isCompleted: {
-                equals: false,
-              },
+              isCompleted: false,
             },
+          },
+        });
+      },
+    });
+  },
+});
+
+export const TodoMutation = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("completeTodo", {
+      type: "Todo",
+      args: {
+        id: nonNull(idArg()),
+      },
+      resolve(parent, args, context) {
+        return context.prisma.todo.update({
+          where: {
+            id: args.id,
+          },
+          data: {
+            isCompleted: true,
           },
         });
       },

@@ -28,6 +28,7 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Query: {};
   Todo: { // root type
     id?: string | null; // String
@@ -51,6 +52,9 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    completeTodo: NexusGenRootTypes['Todo']; // Todo!
+  }
   Query: { // field return type
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
@@ -69,6 +73,9 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    completeTodo: 'Todo'
+  }
   Query: { // field return type name
     hooray: 'String'
     todos: 'Todo'
@@ -87,6 +94,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    completeTodo: { // args
+      id: string; // ID!
+    }
+  }
   Query: {
     todos: { // args
       ids?: Array<string | null> | null; // [String]

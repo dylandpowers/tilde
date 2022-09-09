@@ -51,7 +51,11 @@ const TodoCard: React.FC = () => {
             <ListItem key={t.id} disablePadding>
               <ListItemButton role={undefined}>
                 <ListItemIcon>
-                  <Checkbox edge="start" checked={false} tabIndex={-1} />
+                  <Checkbox
+                    edge="start"
+                    checked={t.isCompleted}
+                    tabIndex={-1}
+                  />
                 </ListItemIcon>
                 <ListItemText primary={t.text} />
               </ListItemButton>
