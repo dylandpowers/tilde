@@ -19,3 +19,11 @@ export const ADD_TODO = gql`
     }
   }
 `;
+
+export const COMPLETE_TODO = gql`
+  mutation CompleteTodo($id: ID!) {
+    completeTodo(id: $id) {
+      id
+    }
+  }
+`;

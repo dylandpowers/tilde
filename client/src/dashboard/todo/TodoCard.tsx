@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import React, { useState } from "react";
-import { ADD_TODO, GET_INCOMPLETE_TODOS } from "./queries";
+import { ADD_TODO, COMPLETE_TODO, GET_INCOMPLETE_TODOS } from "./queries";
 
 interface Todo {
   id: string;
@@ -28,6 +28,9 @@ const TodoCard: React.FC = () => {
   const { data, loading } = useQuery<TodoData>(GET_INCOMPLETE_TODOS);
   const [addTodo] = useMutation<Todo>(ADD_TODO, {
     refetchQueries: [{ query: GET_INCOMPLETE_TODOS }, "GetIncompleteTodos"],
+  });
+  const [completeTodo] = useMutation<Todo>(COMPLETE_TODO, {
+    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }, "CompleteTodo"],
   });
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [newTodoText, setNewTodoText] = useState<string>("");
@@ -70,7 +73,16 @@ const TodoCard: React.FC = () => {
             <ListItem key={t.id} disablePadding>
               <ListItemButton role={undefined}>
                 <ListItemIcon>
-                  <Checkbox edge="start" checked={false} tabIndex={-1} />
+                  <Checkbox
+                    edge="start"
+                    checked={t.isCompleted}
+                    tabIndex={-1}
+                    onChange={() =>
+                      completeTodo({
+                        variables: { id: t.id },
+                      })
+                    }
+                  />
                 </ListItemIcon>
                 <ListItemText primary={t.text} />
               </ListItemButton>
