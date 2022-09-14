@@ -53,6 +53,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    addTodo: NexusGenRootTypes['Todo']; // Todo!
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
   }
   Query: { // field return type
@@ -74,6 +75,7 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    addTodo: 'Todo'
     completeTodo: 'Todo'
   }
   Query: { // field return type name
@@ -95,6 +97,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addTodo: { // args
+      text: string; // String!
+    }
     completeTodo: { // args
       id: string; // ID!
     }

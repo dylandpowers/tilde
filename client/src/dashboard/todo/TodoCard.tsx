@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   Card,
   CardContent,
@@ -8,9 +8,11 @@ import {
   ListItemIcon,
   ListItemText,
   Skeleton,
+  TextField,
 } from "@mui/material";
-import React from "react";
-import { GET_INCOMPLETE_TODOS } from "./queries";
+import AddIcon from "@mui/icons-material/Add";
+import React, { useState } from "react";
+import { ADD_TODO, GET_INCOMPLETE_TODOS } from "./queries";
 
 interface Todo {
   id: string;
@@ -24,6 +26,11 @@ interface TodoData {
 
 const TodoCard: React.FC = () => {
   const { data, loading } = useQuery<TodoData>(GET_INCOMPLETE_TODOS);
+  const [addTodo] = useMutation<Todo>(ADD_TODO, {
+    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }, "GetIncompleteTodos"],
+  });
+  const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [newTodoText, setNewTodoText] = useState<string>("");
 
   const renderLoadingState = (): JSX.Element => {
     return (
@@ -42,6 +49,18 @@ const TodoCard: React.FC = () => {
     );
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" && !!newTodoText.length) {
+      addTodo({
+        variables: {
+          text: newTodoText,
+        },
+      });
+      setNewTodoText("");
+      setIsAdding(false);
+    }
+  };
+
   return (
     <Card>
       <CardContent>
@@ -51,16 +70,33 @@ const TodoCard: React.FC = () => {
             <ListItem key={t.id} disablePadding>
               <ListItemButton role={undefined}>
                 <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={t.isCompleted}
-                    tabIndex={-1}
-                  />
+                  <Checkbox edge="start" checked={false} tabIndex={-1} />
                 </ListItemIcon>
                 <ListItemText primary={t.text} />
               </ListItemButton>
             </ListItem>
           ))}
+        <ListItem key="addTodo" disablePadding>
+          <ListItemButton role="button" onClick={() => setIsAdding(true)}>
+            <ListItemIcon>
+              <AddIcon />
+            </ListItemIcon>
+            {isAdding ? (
+              <TextField
+                id="add-todo"
+                label="Enter text here"
+                size="small"
+                error={!newTodoText.length}
+                value={newTodoText}
+                onKeyDown={onKeyDown}
+                onChange={(e) => setNewTodoText(e.target.value)}
+                sx={{ flex: 1 }}
+              />
+            ) : (
+              <ListItemText>Add Todo</ListItemText>
+            )}
+          </ListItemButton>
+        </ListItem>
       </CardContent>
     </Card>
   );

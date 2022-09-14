@@ -60,5 +60,19 @@ export const TodoMutation = extendType({
         });
       },
     });
+    t.nonNull.field("addTodo", {
+      type: "Todo",
+      args: {
+        text: nonNull(stringArg()),
+      },
+      resolve(parent, args, context) {
+        return context.prisma.todo.create({
+          data: {
+            text: args.text,
+            isCompleted: false,
+          },
+        });
+      },
+    });
   },
 });
