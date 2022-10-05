@@ -1,11 +1,13 @@
 import { objectType, extendType, list, stringArg, idArg, nonNull } from "nexus";
+import { Todo } from "nexus-prisma";
 
-export const Todo = objectType({
-  name: "Todo",
+export const TodoType = objectType({
+  name: Todo.$name,
   definition(t) {
-    t.string("id"); // null on creates
-    t.nonNull.boolean("isCompleted");
-    t.nonNull.string("text");
+    t.field(Todo.id);
+    t.field(Todo.text);
+    t.field(Todo.isCompleted);
+    t.field(Todo.updatedAt);
   },
 });
 
@@ -34,6 +36,16 @@ export const TodoQuery = extendType({
             AND: {
               isCompleted: false,
             },
+          },
+        });
+      },
+    });
+    t.nonNull.field("completedTodos", {
+      type: list("Todo"),
+      resolve(parent, args, context) {
+        return context.prisma.todo.findMany({
+          where: {
+            isCompleted: true,
           },
         });
       },

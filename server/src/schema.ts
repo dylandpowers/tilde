@@ -3,13 +3,13 @@ import { join } from "path";
 import * as types from "./graphql";
 
 export const schema = makeSchema({
-  types: types,
+  types,
   outputs: {
     schema: join(process.cwd(), "schema.graphql"),
     typegen: join(process.cwd(), "nexus-typegen.ts"),
   },
   contextType: {
     module: join(process.cwd(), "src/context.ts"),
-    export: "Context"
-  }
+    export: "Context",
+  },
 });

@@ -5,8 +5,23 @@
 
 
 import type { Context } from "./src/context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -25,15 +40,17 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   Todo: { // root type
-    id?: string | null; // String
+    id: string; // ID!
     isCompleted: boolean; // Boolean!
     text: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Weather: { // root type
     degrees: string; // String!
@@ -57,15 +74,17 @@ export interface NexusGenFieldTypes {
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
   }
   Query: { // field return type
+    completedTodos: Array<NexusGenRootTypes['Todo'] | null>; // [Todo]!
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
     token: string; // String!
     weather: NexusGenRootTypes['Weather']; // Weather!
   }
   Todo: { // field return type
-    id: string | null; // String
+    id: string; // ID!
     isCompleted: boolean; // Boolean!
     text: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Weather: { // field return type
     degrees: string; // String!
@@ -79,15 +98,17 @@ export interface NexusGenFieldTypeNames {
     completeTodo: 'Todo'
   }
   Query: { // field return type name
+    completedTodos: 'Todo'
     hooray: 'String'
     todos: 'Todo'
     token: 'String'
     weather: 'Weather'
   }
   Todo: { // field return type name
-    id: 'String'
+    id: 'ID'
     isCompleted: 'Boolean'
     text: 'String'
+    updatedAt: 'DateTime'
   }
   Weather: { // field return type name
     degrees: 'String'
