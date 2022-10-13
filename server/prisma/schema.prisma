@@ -15,9 +15,16 @@ datasource db {
 }
 
 model Todo {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
   text        String
-  isCompleted Boolean  @default(false)
+  isCompleted Boolean   @default(false)
+}
+
+model ReadingActivity {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  date    DateTime @default(now())
+  minutes Int
+  book    String
 }

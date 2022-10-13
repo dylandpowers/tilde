@@ -46,11 +46,18 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Query: {};
+  ReadingActivity: { // root type
+    book: string; // String!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    minutes: number; // Int!
+  }
   Todo: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // ID!
     isCompleted: boolean; // Boolean!
     text: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   Weather: { // root type
     degrees: string; // String!
@@ -70,21 +77,30 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    addReadingActivity: NexusGenRootTypes['ReadingActivity']; // ReadingActivity!
     addTodo: NexusGenRootTypes['Todo']; // Todo!
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
   }
   Query: { // field return type
+    activities: Array<NexusGenRootTypes['ReadingActivity'] | null> | null; // [ReadingActivity]
     completedTodos: Array<NexusGenRootTypes['Todo'] | null>; // [Todo]!
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
     token: string; // String!
     weather: NexusGenRootTypes['Weather']; // Weather!
   }
+  ReadingActivity: { // field return type
+    book: string; // String!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    minutes: number; // Int!
+  }
   Todo: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // ID!
     isCompleted: boolean; // Boolean!
     text: string; // String!
-    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
   }
   Weather: { // field return type
     degrees: string; // String!
@@ -94,17 +110,26 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    addReadingActivity: 'ReadingActivity'
     addTodo: 'Todo'
     completeTodo: 'Todo'
   }
   Query: { // field return type name
+    activities: 'ReadingActivity'
     completedTodos: 'Todo'
     hooray: 'String'
     todos: 'Todo'
     token: 'String'
     weather: 'Weather'
   }
+  ReadingActivity: { // field return type name
+    book: 'String'
+    date: 'DateTime'
+    id: 'ID'
+    minutes: 'Int'
+  }
   Todo: { // field return type name
+    createdAt: 'DateTime'
     id: 'ID'
     isCompleted: 'Boolean'
     text: 'String'
@@ -118,6 +143,10 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addReadingActivity: { // args
+      book: string; // String!
+      minutes: number; // Int!
+    }
     addTodo: { // args
       text: string; // String!
     }
@@ -126,6 +155,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    activities: { // args
+      month?: number | null; // Int
+    }
     todos: { // args
       ids?: Array<string | null> | null; // [String]
     }

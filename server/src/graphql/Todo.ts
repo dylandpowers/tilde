@@ -7,6 +7,7 @@ export const TodoType = objectType({
     t.field(Todo.id);
     t.field(Todo.text);
     t.field(Todo.isCompleted);
+    t.field(Todo.createdAt);
     t.field(Todo.updatedAt);
   },
 });

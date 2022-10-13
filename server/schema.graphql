@@ -8,11 +8,13 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
+  addReadingActivity(book: String!, minutes: Int!): ReadingActivity!
   addTodo(text: String!): Todo!
   completeTodo(id: ID!): Todo!
 }
 
 type Query {
+  activities(month: Int): [ReadingActivity]
   completedTodos: [Todo]!
   hooray: String!
   todos(ids: [String]): [Todo]
@@ -20,11 +22,19 @@ type Query {
   weather: Weather!
 }
 
+type ReadingActivity {
+  book: String!
+  date: DateTime!
+  id: ID!
+  minutes: Int!
+}
+
 type Todo {
+  createdAt: DateTime
   id: ID!
   isCompleted: Boolean!
   text: String!
-  updatedAt: DateTime!
+  updatedAt: DateTime
 }
 
 type Weather {
