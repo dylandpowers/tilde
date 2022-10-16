@@ -10,7 +10,7 @@ const DashboardPage: React.FC = () => {
   return (
     <Box>
       <Grid container alignItems="flex-start" spacing={2}>
-        <Grid item xs={10}>
+        <Grid item xs={10} sx={{ alignSelf: "center" }}>
           <QuoteCard />
         </Grid>
         <Grid item xs={2}>

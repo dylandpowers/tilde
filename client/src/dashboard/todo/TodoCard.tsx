@@ -44,7 +44,7 @@ const TodoCard: React.FC = () => {
               <ListItemIcon>
                 <Checkbox edge="start" checked={false} tabIndex={-1} />
               </ListItemIcon>
-              <Skeleton />
+              <Skeleton sx={{ flex: 1 }} />
             </ListItemButton>
           </ListItem>
         ))}
