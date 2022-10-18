@@ -55,6 +55,19 @@ export const ReadingActivityQuery = extendType({
         });
       },
     });
+    t.field("books", {
+      type: list("String"),
+      resolve(parent, args, context) {
+        return context.prisma.readingActivity
+          .findMany({
+            select: {
+              book: true,
+            },
+            distinct: ["book"],
+          })
+          .then((records) => records.map((record) => record.book));
+      },
+    });
   },
 });
 

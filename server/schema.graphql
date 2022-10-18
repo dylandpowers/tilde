@@ -15,6 +15,7 @@ type Mutation {
 
 type Query {
   activities(month: Int): [ReadingActivity]
+  books: [String]
   completedTodos: [Todo]!
   hooray: String!
   todos(ids: [String]): [Todo]

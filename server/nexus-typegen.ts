@@ -83,6 +83,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     activities: Array<NexusGenRootTypes['ReadingActivity'] | null> | null; // [ReadingActivity]
+    books: Array<string | null> | null; // [String]
     completedTodos: Array<NexusGenRootTypes['Todo'] | null>; // [Todo]!
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
@@ -116,6 +117,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     activities: 'ReadingActivity'
+    books: 'String'
     completedTodos: 'Todo'
     hooray: 'String'
     todos: 'Todo'

@@ -7,3 +7,9 @@ export const LOG_READING_ACTIVITY = gql`
     }
   }
 `;
+
+export const GET_BOOKS = gql`
+  query {
+    books
+  }
+`;
