@@ -89,5 +89,19 @@ export const ReadingActivityMutation = extendType({
         });
       },
     });
+    t.nonNull.field("addBook", {
+      type: "String",
+      args: {
+        book: nonNull(stringArg()),
+      },
+      resolve(parent, args, context) {
+        return context.prisma.readingActivity.create({
+          data: {
+            minutes: 0,
+            book: args.book,
+          },
+        });
+      },
+    });
   },
 });

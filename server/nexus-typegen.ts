@@ -77,6 +77,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    addBook: string; // String!
     addReadingActivity: NexusGenRootTypes['ReadingActivity']; // ReadingActivity!
     addTodo: NexusGenRootTypes['Todo']; // Todo!
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
@@ -111,6 +112,7 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    addBook: 'String'
     addReadingActivity: 'ReadingActivity'
     addTodo: 'Todo'
     completeTodo: 'Todo'
@@ -145,6 +147,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addBook: { // args
+      book: string; // String!
+    }
     addReadingActivity: { // args
       book: string; // String!
       minutes: number; // Int!

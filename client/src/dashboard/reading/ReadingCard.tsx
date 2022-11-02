@@ -6,13 +6,18 @@ import {
   TextField,
   InputLabel,
   FormControl,
+  Snackbar,
+  Alert,
+  IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
+import AddIcon from "@mui/icons-material/Add";
 import React, { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_BOOKS, LOG_READING_ACTIVITY } from "./queries";
+import AddBookModal from "./AddBookModal";
 
 const NUMBER_REGEX = new RegExp("\\d+");
 
@@ -21,11 +26,13 @@ interface BookData {
 }
 
 const ReadingCard: React.FC = () => {
-  const [logActivity, { loading }] = useMutation(LOG_READING_ACTIVITY);
+  const [logActivity, { data, loading, reset }] =
+    useMutation(LOG_READING_ACTIVITY);
   const books = useQuery<BookData>(GET_BOOKS);
 
   const [readingMinutes, setReadingMinutes] = useState<string>("0");
   const [book, setBook] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const isActivityValid = useMemo<boolean>(
     () =>
@@ -34,6 +41,15 @@ const ReadingCard: React.FC = () => {
       !!book.length,
     [readingMinutes, book]
   );
+
+  const onSave = () => {
+    logActivity({
+      variables: {
+        minutes: Number(readingMinutes),
+        book,
+      },
+    });
+  };
 
   return (
     <Card>
@@ -64,18 +80,21 @@ const ReadingCard: React.FC = () => {
                   </MenuItem>
                 ))}
             </Select>
+            <IconButton
+              aria-label="add-book"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <AddIcon />
+            </IconButton>
+            <AddBookModal
+              open={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
           </FormControl>
           <LoadingButton
             loading={loading}
             loadingPosition="start"
-            onClick={() =>
-              logActivity({
-                variables: {
-                  minutes: Number(readingMinutes),
-                  book,
-                },
-              })
-            }
+            onClick={onSave}
             disabled={!isActivityValid}
             startIcon={<SaveIcon />}
             variant="contained"
@@ -86,6 +105,9 @@ const ReadingCard: React.FC = () => {
           </LoadingButton>
         </Box>
       </CardContent>
+      <Snackbar open={!!data} autoHideDuration={5000} onClose={reset}>
+        <Alert severity="success">Successfully saved reading activity!</Alert>
+      </Snackbar>
     </Card>
   );
 };
