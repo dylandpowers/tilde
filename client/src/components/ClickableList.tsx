@@ -8,7 +8,7 @@ type Props = {
 const ClickableList: React.FC<Props> = (props) => {
   return (
     <List>
-      {props.labels.map(label => (
+      {props.labels.map((label) => (
         <ListItem key={label}>
           <ListItemButton>
             <ListItemText primary={label} />
@@ -19,4 +19,4 @@ const ClickableList: React.FC<Props> = (props) => {
   );
 };
 
-export default ClickableList;
+export { ClickableList };

@@ -11,13 +11,12 @@ import {
   IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import LoadingButton from "@mui/lab/LoadingButton";
-import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
 import React, { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_BOOKS, LOG_READING_ACTIVITY } from "./queries";
 import AddBookModal from "./AddBookModal";
+import { SaveButton } from "../../components";
 
 const NUMBER_REGEX = new RegExp("\\d+");
 
@@ -82,6 +81,7 @@ const ReadingCard: React.FC = () => {
             </Select>
             <IconButton
               aria-label="add-book"
+              size="small"
               onClick={() => setIsModalOpen(true)}
             >
               <AddIcon />
@@ -91,18 +91,12 @@ const ReadingCard: React.FC = () => {
               onClose={() => setIsModalOpen(false)}
             />
           </FormControl>
-          <LoadingButton
+          <SaveButton
+            onSave={onSave}
             loading={loading}
-            loadingPosition="start"
-            onClick={onSave}
             disabled={!isActivityValid}
-            startIcon={<SaveIcon />}
-            variant="contained"
-            color="success"
-            sx={{ height: "56px" }}
-          >
-            Save
-          </LoadingButton>
+            height="56px"
+          />
         </Box>
       </CardContent>
       <Snackbar open={!!data} autoHideDuration={5000} onClose={reset}>

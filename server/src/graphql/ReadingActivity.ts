@@ -95,12 +95,14 @@ export const ReadingActivityMutation = extendType({
         book: nonNull(stringArg()),
       },
       resolve(parent, args, context) {
-        return context.prisma.readingActivity.create({
-          data: {
-            minutes: 0,
-            book: args.book,
-          },
-        });
+        return context.prisma.readingActivity
+          .create({
+            data: {
+              minutes: 0,
+              book: args.book,
+            },
+          })
+          .then(() => args.book);
       },
     });
   },

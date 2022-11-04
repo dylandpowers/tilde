@@ -28,4 +28,4 @@ const Modal: React.FC<Props> = (props) => {
   );
 };
 
-export default Modal;
+export { Modal };

@@ -8,6 +8,12 @@ export const LOG_READING_ACTIVITY = gql`
   }
 `;
 
+export const ADD_BOOK = gql`
+  mutation AddBook($book: String!) {
+    addBook(book: $book)
+  }
+`;
+
 export const GET_BOOKS = gql`
   query {
     books
