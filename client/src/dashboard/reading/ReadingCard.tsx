@@ -6,8 +6,6 @@ import {
   TextField,
   InputLabel,
   FormControl,
-  Snackbar,
-  Alert,
   IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -16,7 +14,7 @@ import React, { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_BOOKS, LOG_READING_ACTIVITY } from "./queries";
 import AddBookModal from "./AddBookModal";
-import { SaveButton } from "../../components";
+import { SuccessSnackbar, SaveButton } from "../../components";
 
 const NUMBER_REGEX = new RegExp("\\d+");
 
@@ -83,6 +81,11 @@ const ReadingCard: React.FC = () => {
               aria-label="add-book"
               size="small"
               onClick={() => setIsModalOpen(true)}
+              sx={{
+                width: "12%",
+                alignSelf: "center",
+                marginTop: 1,
+              }}
             >
               <AddIcon />
             </IconButton>
@@ -99,9 +102,11 @@ const ReadingCard: React.FC = () => {
           />
         </Box>
       </CardContent>
-      <Snackbar open={!!data} autoHideDuration={5000} onClose={reset}>
-        <Alert severity="success">Successfully saved reading activity!</Alert>
-      </Snackbar>
+      <SuccessSnackbar
+        open={!!data}
+        onClose={reset}
+        message="Successfully saved reading activity!"
+      />
     </Card>
   );
 };

@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
-import { Alert, Box, Snackbar, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Modal, SaveButton } from "../../components";
+import { Modal, SuccessSnackbar, SaveButton } from "../../components";
 import { ADD_BOOK } from "./queries";
 
 type Props = {
@@ -42,9 +42,11 @@ const AddBookModal: React.FC<Props> = (props) => {
           <SaveButton disabled={!bookName} onSave={onSave} loading={loading} />
         </Box>
       </Modal>
-      <Snackbar open={!!data} autoHideDuration={5000} onClose={reset}>
-        <Alert severity="success">Successfully saved book!</Alert>
-      </Snackbar>
+      <SuccessSnackbar
+        open={!!data}
+        onClose={reset}
+        message="Successfully added book!"
+      />
     </>
   );
 };
