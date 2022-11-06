@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes as RouterRoutes, Route } from "react-router-dom";
+import { Routes as RouterRoutes, Route, Navigate } from "react-router-dom";
 import DashboardPage from "./dashboard/DashboardPage";
 import Layout from "./layout/Layout";
 
@@ -7,7 +7,8 @@ const Routes: React.FC = () => {
   return (
     <RouterRoutes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/" element={<Navigate to="/dashboard" />} />
       </Route>
     </RouterRoutes>
   );
