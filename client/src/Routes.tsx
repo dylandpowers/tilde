@@ -1,15 +1,15 @@
-import { Toolbar } from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
+import { Routes as RouterRoutes, Route } from "react-router-dom";
 import DashboardPage from "./dashboard/DashboardPage";
+import Layout from "./layout/Layout";
 
 const Routes: React.FC = () => {
-  // TODO(dpowers): add router framework
   return (
-    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <Toolbar />
-      <DashboardPage />
-    </Box>
+    <RouterRoutes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<DashboardPage />} />
+      </Route>
+    </RouterRoutes>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { FC } from "react";
 import { Box } from "@mui/system";
+import { Outlet } from "react-router-dom";
+import { Toolbar } from "@mui/material";
+
 import Header from "./Header";
 import AppDrawer from "./AppDrawer";
-
-type Props = {
-  children: React.ReactNode;
-}
 
 /**
  * The layout component contains elements that will always be on the screen, regardless of the
@@ -14,12 +13,15 @@ type Props = {
  * @param props
  * @returns
  */
-const Layout: FC<Props> = (props) => {
+const Layout: FC = () => {
   return (
     <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
       <Header />
       <AppDrawer />
-      {props.children}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Outlet />
+      </Box>
     </Box>
   );
 };
