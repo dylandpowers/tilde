@@ -7,7 +7,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const drawerWidth = "240px";
 
@@ -28,6 +28,7 @@ const entries: DrawerEntry[] = [
 ];
 
 const AppDrawer: React.FC = () => {
+  const location = useLocation();
   return (
     <Drawer
       variant="permanent"
@@ -43,7 +44,12 @@ const AppDrawer: React.FC = () => {
         <List>
           {entries.map((e) => (
             <ListItem disablePadding key={e.route}>
-              <ListItemButton component={Link} to={e.route}>
+              <ListItemButton
+                component={Link}
+                to={e.route}
+                sx={{ height: "60px" }}
+                selected={location.pathname === e.route}
+              >
                 {e.label}
               </ListItemButton>
             </ListItem>
