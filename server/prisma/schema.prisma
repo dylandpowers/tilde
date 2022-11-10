@@ -28,3 +28,10 @@ model ReadingActivity {
   minutes Int
   book    String
 }
+
+model JournalEntry {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  date       DateTime @default(now())
+  text       String
+  categories String[]
+}

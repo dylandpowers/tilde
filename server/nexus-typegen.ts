@@ -44,6 +44,12 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  JournalEntry: { // root type
+    categories: string[]; // [String!]!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    text: string; // String!
+  }
   Mutation: {};
   Query: {};
   ReadingActivity: { // root type
@@ -76,8 +82,15 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  JournalEntry: { // field return type
+    categories: string[]; // [String!]!
+    date: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    text: string; // String!
+  }
   Mutation: { // field return type
     addBook: string; // String!
+    addJournalEntry: NexusGenRootTypes['JournalEntry']; // JournalEntry!
     addReadingActivity: NexusGenRootTypes['ReadingActivity']; // ReadingActivity!
     addTodo: NexusGenRootTypes['Todo']; // Todo!
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
@@ -86,6 +99,7 @@ export interface NexusGenFieldTypes {
     activities: Array<NexusGenRootTypes['ReadingActivity'] | null> | null; // [ReadingActivity]
     books: Array<string | null> | null; // [String]
     completedTodos: Array<NexusGenRootTypes['Todo'] | null>; // [Todo]!
+    getJournalEntries: Array<NexusGenRootTypes['JournalEntry'] | null>; // [JournalEntry]!
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
     token: string; // String!
@@ -111,8 +125,15 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  JournalEntry: { // field return type name
+    categories: 'String'
+    date: 'DateTime'
+    id: 'ID'
+    text: 'String'
+  }
   Mutation: { // field return type name
     addBook: 'String'
+    addJournalEntry: 'JournalEntry'
     addReadingActivity: 'ReadingActivity'
     addTodo: 'Todo'
     completeTodo: 'Todo'
@@ -121,6 +142,7 @@ export interface NexusGenFieldTypeNames {
     activities: 'ReadingActivity'
     books: 'String'
     completedTodos: 'Todo'
+    getJournalEntries: 'JournalEntry'
     hooray: 'String'
     todos: 'Todo'
     token: 'String'
@@ -149,6 +171,10 @@ export interface NexusGenArgTypes {
   Mutation: {
     addBook: { // args
       book: string; // String!
+    }
+    addJournalEntry: { // args
+      categories: string[]; // [String!]!
+      text: string; // String!
     }
     addReadingActivity: { // args
       book: string; // String!

@@ -7,8 +7,16 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type JournalEntry {
+  categories: [String!]!
+  date: DateTime!
+  id: ID!
+  text: String!
+}
+
 type Mutation {
   addBook(book: String!): String!
+  addJournalEntry(categories: [String!]!, text: String!): JournalEntry!
   addReadingActivity(book: String!, minutes: Int!): ReadingActivity!
   addTodo(text: String!): Todo!
   completeTodo(id: ID!): Todo!
@@ -18,6 +26,7 @@ type Query {
   activities(month: Int): [ReadingActivity]
   books: [String]
   completedTodos: [Todo]!
+  getJournalEntries: [JournalEntry]!
   hooray: String!
   todos(ids: [String]): [Todo]
   token: String!
