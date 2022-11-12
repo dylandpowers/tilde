@@ -8,7 +8,7 @@ import AppDrawer from "./AppDrawer";
 
 /**
  * The layout component contains elements that will always be on the screen, regardless of the
- * current route. This includes the app bar and the menu bar.
+ * current route. This includes the app bar and the menu bar.q
  *
  * @param props
  * @returns
@@ -20,7 +20,9 @@ const Layout: FC = () => {
       <AppDrawer />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Outlet />
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
