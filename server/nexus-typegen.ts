@@ -99,7 +99,7 @@ export interface NexusGenFieldTypes {
     activities: Array<NexusGenRootTypes['ReadingActivity'] | null> | null; // [ReadingActivity]
     books: Array<string | null> | null; // [String]
     completedTodos: Array<NexusGenRootTypes['Todo'] | null>; // [Todo]!
-    getJournalEntries: Array<NexusGenRootTypes['JournalEntry'] | null>; // [JournalEntry]!
+    entries: Array<NexusGenRootTypes['JournalEntry'] | null>; // [JournalEntry]!
     hooray: string; // String!
     todos: Array<NexusGenRootTypes['Todo'] | null> | null; // [Todo]
     token: string; // String!
@@ -142,7 +142,7 @@ export interface NexusGenFieldTypeNames {
     activities: 'ReadingActivity'
     books: 'String'
     completedTodos: 'Todo'
-    getJournalEntries: 'JournalEntry'
+    entries: 'JournalEntry'
     hooray: 'String'
     todos: 'Todo'
     token: 'String'

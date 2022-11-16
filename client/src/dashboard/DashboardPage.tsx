@@ -11,7 +11,7 @@ const DashboardPage: React.FC = () => {
     <Box>
       <Grid container alignItems="flex-start" spacing={2}>
         {/* we are aligning the quote at the start due to the image below being large */}
-        <Grid item xs={10} sx={{ alignSelf: "center" }}>
+        <Grid item xs={10} sx={{ alignSelf: "center", paddingRight: "8px" }}>
           <QuoteCard />
         </Grid>
         <Grid item xs={2}>

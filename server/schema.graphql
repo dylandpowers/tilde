@@ -26,7 +26,7 @@ type Query {
   activities(month: Int): [ReadingActivity]
   books: [String]
   completedTodos: [Todo]!
-  getJournalEntries: [JournalEntry]!
+  entries: [JournalEntry]!
   hooray: String!
   todos(ids: [String]): [Todo]
   token: String!

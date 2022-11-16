@@ -20,7 +20,7 @@ const Layout: FC = () => {
       <AppDrawer />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ maxWidth: "1200px" }}>
           <Outlet />
         </Box>
       </Box>

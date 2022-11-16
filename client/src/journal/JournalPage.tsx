@@ -1,11 +1,11 @@
-import { TextField } from "@mui/material";
+import { List, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { SaveButton } from "../components";
 
 const JournalPage: React.FC = () => {
   return (
-    <Box sx={{ width: "50%" }}>
+    <Box>
       <TextField
         placeholder="Write down some thoughts..."
         multiline
@@ -20,6 +20,7 @@ const JournalPage: React.FC = () => {
           disabled={false}
         />
       </Box>
+      <List></List>
     </Box>
   );
 };

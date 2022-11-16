@@ -14,7 +14,7 @@ export const JournalEntryType = objectType({
 export const JournalEntryQuery = extendType({
   type: "Query",
   definition(t) {
-    t.nonNull.field("getJournalEntries", {
+    t.nonNull.field("entries", {
       type: list("JournalEntry"),
       resolve(parent, args, context) {
         return context.prisma.journalEntry.findMany({
