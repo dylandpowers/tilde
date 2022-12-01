@@ -5,6 +5,9 @@ import {
   ListItemText,
   Skeleton,
   TextField,
+  Card,
+  CardContent,
+  CardHeader,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
@@ -15,7 +18,7 @@ interface Entry {
   id: string;
   text: string;
   categories: [string];
-  date: Date;
+  date: string;
 }
 
 interface EntryData {
@@ -46,9 +49,17 @@ const JournalPage: React.FC = () => {
       ) : (
         <List>
           {data?.entries.map((e) => (
-            <ListItem key={e.id}>
-              <ListItemText>{e.text}</ListItemText>
-            </ListItem>
+            <Card key={e.id} sx={{ marginBottom: "12px" }}>
+              <CardHeader action={new Date(e.date).toDateString()} />
+              <CardContent>
+                <ListItem>
+                  <ListItemText
+                    primary={e.text}
+                    secondary={e.categories.join(", ")}
+                  />
+                </ListItem>
+              </CardContent>
+            </Card>
           ))}
         </List>
       )}
