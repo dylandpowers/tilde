@@ -27,10 +27,10 @@ interface TodoData {
 const TodoCard: React.FC = () => {
   const { data, loading } = useQuery<TodoData>(GET_INCOMPLETE_TODOS);
   const [addTodo] = useMutation<Todo>(ADD_TODO, {
-    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }, "GetIncompleteTodos"],
+    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }],
   });
   const [completeTodo] = useMutation<Todo>(COMPLETE_TODO, {
-    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }, "CompleteTodo"],
+    refetchQueries: [{ query: GET_INCOMPLETE_TODOS }],
   });
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [newTodoText, setNewTodoText] = useState<string>("");
