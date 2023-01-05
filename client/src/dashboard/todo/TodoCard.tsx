@@ -32,8 +32,8 @@ const TodoCard: React.FC = () => {
   const [completeTodo] = useMutation<Todo>(COMPLETE_TODO, {
     refetchQueries: [{ query: GET_INCOMPLETE_TODOS }],
   });
-  const [isAdding, setIsAdding] = useState<boolean>(false);
-  const [newTodoText, setNewTodoText] = useState<string>("");
+  const [isAdding, setIsAdding] = useState(false);
+  const [newTodoText, setNewTodoText] = useState("");
 
   const renderLoadingState = (): JSX.Element => {
     return (
