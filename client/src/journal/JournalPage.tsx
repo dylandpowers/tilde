@@ -31,11 +31,15 @@ interface EntryData {
 
 const JournalPage: React.FC = () => {
   const { data, loading } = useQuery<EntryData>(GET_JOURNAL_ENTRIES);
-  const [categoryFilters] = useState<string[]>([]);
+  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
 
   const filteredEntries = useMemo<Entry[]>(() => {
     if (!data) {
       return [];
+    }
+
+    if (!categoryFilters.length) {
+      return data.entries;
     }
 
     return data.entries.filter((e) =>
@@ -71,7 +75,7 @@ const JournalPage: React.FC = () => {
             id="category-filter-select"
             multiple
             value={categoryFilters}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => setCategoryFilters(e.target.value as string[])}
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
