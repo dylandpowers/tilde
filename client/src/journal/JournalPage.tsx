@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   List,
   Skeleton,
@@ -12,11 +12,13 @@ import {
   Chip,
   OutlinedInput,
   FormControl,
+  IconButton,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
 import React, { useMemo, useState } from "react";
 import { SaveButton } from "../components";
-import { GET_JOURNAL_ENTRIES } from "./queries";
+import { ARCHIVE_JOURNAL_ENTRY, GET_JOURNAL_ENTRIES } from "./queries";
 
 interface Entry {
   id: string;
@@ -32,6 +34,17 @@ interface EntryData {
 const JournalPage: React.FC = () => {
   const { data, loading } = useQuery<EntryData>(GET_JOURNAL_ENTRIES);
   const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
+  const [archiveEntry] = useMutation(ARCHIVE_JOURNAL_ENTRY, {
+    refetchQueries: [{ query: GET_JOURNAL_ENTRIES }],
+  });
+
+  const onDelete = (id: string) => {
+    archiveEntry({
+      variables: {
+        id,
+      },
+    });
+  };
 
   const filteredEntries = useMemo<Entry[]>(() => {
     if (!data) {
@@ -107,6 +120,14 @@ const JournalPage: React.FC = () => {
               <CardHeader
                 title={new Date(e.date).toDateString()}
                 subheader={e.categories.join(", ")}
+                action={
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => onDelete(e.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
               />
               <CardContent>{e.text}</CardContent>
             </Card>

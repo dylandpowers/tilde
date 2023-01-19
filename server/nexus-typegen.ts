@@ -48,6 +48,7 @@ export interface NexusGenObjects {
     categories: string[]; // [String!]!
     date: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    isArchived: boolean; // Boolean!
     text: string; // String!
   }
   Mutation: {};
@@ -86,13 +87,15 @@ export interface NexusGenFieldTypes {
     categories: string[]; // [String!]!
     date: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
+    isArchived: boolean; // Boolean!
     text: string; // String!
   }
   Mutation: { // field return type
     addBook: string; // String!
-    addJournalEntry: NexusGenRootTypes['JournalEntry']; // JournalEntry!
+    addJournalEntry: NexusGenRootTypes['JournalEntry'] | null; // JournalEntry
     addReadingActivity: NexusGenRootTypes['ReadingActivity']; // ReadingActivity!
     addTodo: NexusGenRootTypes['Todo']; // Todo!
+    archiveJournalEntry: string | null; // ID
     completeTodo: NexusGenRootTypes['Todo']; // Todo!
   }
   Query: { // field return type
@@ -129,6 +132,7 @@ export interface NexusGenFieldTypeNames {
     categories: 'String'
     date: 'DateTime'
     id: 'ID'
+    isArchived: 'Boolean'
     text: 'String'
   }
   Mutation: { // field return type name
@@ -136,6 +140,7 @@ export interface NexusGenFieldTypeNames {
     addJournalEntry: 'JournalEntry'
     addReadingActivity: 'ReadingActivity'
     addTodo: 'Todo'
+    archiveJournalEntry: 'ID'
     completeTodo: 'Todo'
   }
   Query: { // field return type name
@@ -182,6 +187,9 @@ export interface NexusGenArgTypes {
     }
     addTodo: { // args
       text: string; // String!
+    }
+    archiveJournalEntry: { // args
+      id: string; // ID!
     }
     completeTodo: { // args
       id: string; // ID!

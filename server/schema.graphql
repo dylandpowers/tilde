@@ -11,14 +11,16 @@ type JournalEntry {
   categories: [String!]!
   date: DateTime!
   id: ID!
+  isArchived: Boolean!
   text: String!
 }
 
 type Mutation {
   addBook(book: String!): String!
-  addJournalEntry(categories: [String!]!, text: String!): JournalEntry!
+  addJournalEntry(categories: [String!]!, text: String!): JournalEntry
   addReadingActivity(book: String!, minutes: Int!): ReadingActivity!
   addTodo(text: String!): Todo!
+  archiveJournalEntry(id: ID!): ID
   completeTodo(id: ID!): Todo!
 }
 

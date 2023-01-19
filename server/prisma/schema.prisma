@@ -34,4 +34,5 @@ model JournalEntry {
   date       DateTime @default(now())
   text       String
   categories String[]
+  isArchived Boolean  @default(false)
 }
